@@ -1,0 +1,7 @@
+default:
+    suites:
+        product_setting:
+            contexts:
+                - sylius.behat.context.ui.admin.product_setting
+            filters:
+                tags: "@product_setting"

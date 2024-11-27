@@ -9,8 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait ProductQuantityMultiplierAwareTrait
 {
-    #[ORM\Column(name: 'quantity_multiplier', type: Types::INTEGER, nullable: false, options: ['default' => 0])]
-    private int $quantityMultiplier = 0;
+    #[ORM\Column(
+        name: 'quantity_multiplier',
+        type: Types::INTEGER,
+        nullable: false,
+        options: ['default' => ProductQuantityMultiplierAwareInterface::DEFAULT_VALUE])
+    ]
+    private int $quantityMultiplier = ProductQuantityMultiplierAwareInterface::DEFAULT_VALUE;
 
     public function getQuantityMultiplier(): int
     {
@@ -20,5 +25,10 @@ trait ProductQuantityMultiplierAwareTrait
     public function setQuantityMultiplier(int $quantityMultiplier): void
     {
         $this->quantityMultiplier = $quantityMultiplier;
+    }
+
+    public function hasQuantityMultiplier(): bool
+    {
+        return ($this->quantityMultiplier ?? 0) > 0;
     }
 }

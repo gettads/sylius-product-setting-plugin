@@ -2,12 +2,12 @@
 
 ## Install
 
-1. Run `composer require gettads/sylius-product-setting-plugin`
+1. Run `composer require gtt/sylius-product-setting-plugin dev-main`
 Add to repositories list:
 ```json
 {
-    "type": "git",
-    "url": "git@gitlab.gtt.cz:sylius/gtt-sylius-product-setting-plugin.git"
+    "type": "vcs",
+    "url": "https://github.com/gettads/sylius-product-setting-plugin.git"
 }
 ```
 2. Add to `config/bundles.php`:

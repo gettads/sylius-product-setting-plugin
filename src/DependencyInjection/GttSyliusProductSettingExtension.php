@@ -50,6 +50,25 @@ class GttSyliusProductSettingExtension extends Extension implements PrependExten
             ]);
         }
 
+        if ($container->hasExtension('sylius_twig_hooks')) {
+            $container->prependExtensionConfig('sylius_twig_hooks', [
+                'hooks' => [
+                    'sylius_admin.product.create.content.form.sections.inventory' => [
+                        'quantity_multiplier' => [
+                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/quantity_multiplier.html.twig',
+                            'priority' => 0,
+                        ],
+                    ],
+                    'sylius_admin.product.update.content.form.sections.inventory' => [
+                        'quantity_multiplier' => [
+                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/quantity_multiplier.html.twig',
+                            'priority' => 0,
+                        ],
+                    ],
+                ],
+            ]);
+        }
+
         if ($container->hasExtension('api_platform')) {
             $container->prependExtensionConfig(
                 'api_platform',

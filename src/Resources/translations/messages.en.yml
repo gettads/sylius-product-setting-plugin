@@ -1,0 +1,3 @@
+sylius:
+    ui:
+        quantity_miltiplier: Quantity multiplier

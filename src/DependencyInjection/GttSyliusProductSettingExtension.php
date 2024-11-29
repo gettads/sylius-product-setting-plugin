@@ -31,10 +31,12 @@ class GttSyliusProductSettingExtension extends Extension implements PrependExten
         $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         if ($container->hasExtension('twig')) {
-            $container->prependExtensionConfig(
-                'twig',
-                ['paths' => [Configuration::TEMPLATES_DIR => 'GttSyliusProductSettingPlugin']],
-            );
+            $twigConfig = $container->getExtensionConfig('twig');
+            $container->prependExtensionConfig('twig', [
+                'paths' => array_merge(array_pop($twigConfig)['paths'] ?? [], [
+                    Configuration::TEMPLATES_DIR => 'GttSyliusProductSettingPlugin',
+                ]),
+            ]);
         }
 
         if ($container->hasExtension('framework')) {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Gtt\SyliusProductSettingPlugin\Contract\Product;
+namespace Gtt\SyliusProductSettingPlugin\Contract\ProductVariant;
 
-interface ProductQuantityMultiplierAwareInterface
+interface ProductVariantQuantityMultiplierAwareInterface
 {
     /**
      * Test implementation for test goals: all product variants will have multiplier = 10.

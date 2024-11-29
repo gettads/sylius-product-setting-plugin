@@ -16,12 +16,7 @@ Add to repositories list:
     Gtt\SyliusProductSettingPlugin\GttSyliusProductSettingPlugin::class => ['all' => true],
 ```
 
-3. Add to routes.yaml:
-```
-gtt_sylius_product_setting:
-    resource: '@GttSyliusProductSettingPlugin/Resources/config/routing.yml'
-```
-4. Run `php bin/console doctrine:migrations:diff`, `php bin/console doctrine:migrations:migrate` and `php bin/console cache:clear`
+3. Run `php bin/console doctrine:migrations:diff`, `php bin/console doctrine:migrations:migrate` and `php bin/console cache:clear`
 
 ## Tests
 ### Initialization

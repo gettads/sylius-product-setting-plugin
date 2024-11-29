@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gtt\SyliusProductSettingPlugin\Form\Extension;
 
+use Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType as AdminProductVariantType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -39,6 +40,9 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
      */
     public static function getExtendedTypes(): iterable
     {
-        return [ProductVariantType::class];
+        return [
+            ProductVariantType::class,
+            AdminProductVariantType::class,
+        ];
     }
 }

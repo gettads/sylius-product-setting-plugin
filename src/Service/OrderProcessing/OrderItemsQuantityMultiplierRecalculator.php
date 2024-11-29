@@ -22,18 +22,18 @@ final class OrderItemsQuantityMultiplierRecalculator implements OrderProcessorIn
 
     public function process(BaseOrderInterface $order): void
     {
-        assert($order instanceof OrderInterface);
-
-        if (false === $order->canBeProcessed()) {
+        if (!$order->canBeProcessed()) {
             return;
         }
 
         foreach ($order->getItems() as $orderItem) {
             assert($orderItem instanceof OrderItemInterface);
-
-            if (true === $this->isValidQuantityByMultiplier($orderItem)) {
+            
+            if (!$this->canOrderItemBeProcessed($orderItem) || $this->isValidQuantityByMultiplier($orderItem)) {
                 continue;
             }
+
+            assert($orderItem->getVariant() instanceof ProductVariantQuantityMultiplierAwareInterface);
 
             $this->orderItemQuantityModifier->modify(
                 $orderItem,
@@ -42,7 +42,7 @@ final class OrderItemsQuantityMultiplierRecalculator implements OrderProcessorIn
         }
     }
 
-    private function isValidQuantityByMultiplier(OrderItemInterface $orderItem): bool
+    private function canOrderItemBeProcessed(OrderItemInterface $orderItem): bool
     {
         $productVariant = $orderItem->getVariant();
 
@@ -50,9 +50,20 @@ final class OrderItemsQuantityMultiplierRecalculator implements OrderProcessorIn
             !$productVariant instanceof ProductVariantQuantityMultiplierAwareInterface
             || !$productVariant->hasQuantityMultiplier()
         ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function isValidQuantityByMultiplier(OrderItemInterface $orderItem): bool
+    {
+        if (!$this->canOrderItemBeProcessed($orderItem)) {
             return true;
         }
 
-        return $orderItem->getQuantity() % $productVariant->getQuantityMultiplier() === 0;
+        assert($orderItem->getVariant() instanceof ProductVariantQuantityMultiplierAwareInterface);
+
+        return $orderItem->getQuantity() % $orderItem->getVariant()->getQuantityMultiplier() === 0;
     }
 }

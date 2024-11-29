@@ -57,14 +57,17 @@ class GttSyliusProductSettingExtension extends Extension implements PrependExten
                 'hooks' => [
                     'sylius_admin.product.create.content.form.sections.inventory' => [
                         'quantity_multiplier' => [
-                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/quantity_multiplier.html.twig',
-                            'priority' => 0,
+                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/Admin/quantity_multiplier.html.twig',
                         ],
                     ],
                     'sylius_admin.product.update.content.form.sections.inventory' => [
                         'quantity_multiplier' => [
-                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/quantity_multiplier.html.twig',
-                            'priority' => 0,
+                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/Admin/quantity_multiplier.html.twig',
+                        ],
+                    ],
+                    'sylius_shop.product.show.content.info.summary.add_to_cart' => [
+                        'quantity_multiplier' => [
+                            'template' => '@GttSyliusProductSettingPlugin/EventBlock/Shop/promo_notifier.html.twig',
                         ],
                     ],
                 ],
@@ -85,8 +88,9 @@ class GttSyliusProductSettingExtension extends Extension implements PrependExten
 
     /**
      * @inheritDoc
+     * 
+     * @phpstan-ignore-next-line
      */
-    // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {
         return new Configuration();

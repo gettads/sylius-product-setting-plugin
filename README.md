@@ -18,19 +18,4 @@ Add to repositories list:
 
 3. Run `php bin/console doctrine:migrations:diff`, `php bin/console doctrine:migrations:migrate` and `php bin/console cache:clear`
 
-## Tests
-### Initialization
-```bash
-composer install
-yarn --cwd tests/Application install
-yarn --cwd tests/Application encore dev
-tests/Application/bin/console doctrine:database:create --env test
-tests/Application/bin/console doctrine:schema:create --env test
-```
 
-### Run
-```bash
-composer check
-```
- - You may need to configure your local .env or run `composer tests` with inline parameters, 
-like:  `APP_ENV=test DATABASE_URL=mysql://sylius:pass@mysql_sylius:3306/sylius_test composer tests`

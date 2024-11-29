@@ -1,3 +1,5 @@
 sylius:
     ui:
         quantity_miltiplier: Quantity multiplier
+    messages:
+        promo: Great Choice!

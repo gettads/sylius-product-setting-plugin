@@ -1,0 +1,14 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('{{ hookable_metadata.context.form.cartItem.quantity.vars.id }}');
+        const promoCount = {{ hookable_metadata.context.product.promoQuantityMultiplier }} * {{ hookable_metadata.context.variant.quantityMultiplier }}
+
+        input.oninput = function (e) {
+            if (parseInt(this.value) === promoCount) {
+                setTimeout(function () {
+                    alert('{{ 'sylius.messages.promo' | trans }}');
+                }, 1000);
+            }
+        };
+    });
+</script>
